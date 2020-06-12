@@ -1,12 +1,152 @@
 # shippop-exam
 
-## PDF 1
+## PDF Exam 1
 
 ```bash
-```
-[File](https://www.google.com)
+<!doctype html>
+<html>
+<head>
+<script>
+  src="https://code.jquery.com/jquery-3.5.1.js"
+  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+</head>
 
-## PDF 2
+<body>
+	<form class="form-horizontal">
+<div class="form-group">
+ <label class="col-md-4 control-label" for="list">List</label>  
+  <div class="col-md-4">
+   <input type="text" id="list" name="list" class="form-control input-md" onKeyPress="isInputNumber(event)">
+ </div>
+</div>
+ 
+<div class="form-group">
+   <label class="col-md-4 control-label" for="search">Search</label>  
+  <div class="col-md-4">
+   <input id="search" name="search" type="search" class="form-control input-md" onKeyPress="isInputNumber(event)">
+  </div>
+</div>
+<div class="form-group">
+ <label class="col-md-4 control-label" for="submit"></label>
+  <div class="col-md-4">
+      <button id="submit" name="submit" class="btn btn-primary" onClick="searchBtn()">Search</button>
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="radius">Search radius</label>
+  <div class="col-md-4">
+    <select id="search_opt" name="search_opt" class="form-control">
+      <option value="1">Linear Search</option>
+      <option value="2">Binary Search</option>
+      <option value="3">Bubble Search</option>
+    </select>
+  </div>
+</div>
+ 
+<div id="result"></div>
+
+<script>
+var output = ""
+function isInputNumber(evt) { 
+	var ch = String.fromCharCode(evt.which);
+ 		if(!(/[0-9/,/ ]/.test(ch)))
+  			evt.preventDefault();
+}
+
+function searchBtn(evt) {
+	//evt.preventDefault();
+	document.getElementById("result").innerHTML = ''
+	output = "<p>"
+	var list = document.getElementById("list").value
+	var search = document.getElementById("search").value
+	var opt = document.getElementById("search_opt").value
+	var v = parseInt(opt)
+	output += "List : [" + list + "]<br/>"
+	output += "Search : " + search + "<br/>"
+	output += "Method : " + getOptionName(v) + "<br/>"
+	var result = null
+	switch(v) {
+		case 1:
+			var result = linearSearch((list.split(",")), search)
+			break;
+		case 2:
+			var result = binarySearch((list.split(",")), search)
+			break;
+		case 3:
+			//What is bubble search
+			break;
+	}
+
+	//if (result != null) {
+		output += "</p>"
+		var child = document.createElement('div');
+		child.innerHTML = output;
+		child = child.firstChild;
+		document.getElementById("result").appendChild(child)
+	//}
+}
+
+function getOptionName(opt) {
+
+	switch (opt) {
+		case 1:
+			return "Linear Search"
+		case 2:
+			return "Binary Search"
+		case 3:
+			return "Bubble Search"
+		default:
+			return "Something wrong"
+	}
+}
+
+function linearSearch(arr, search) {
+  	for (var i=0; i < arr.length; i++) {
+    	if (arr[i] == search) {
+    		output += ("Round : " + (i + 1) + " ==> " + search + " = " + arr[i] + " found!!<br/>")
+     	 	return i;
+    	}
+    	output += ("Round : " + (i + 1) + " ==> " + search + " != " + arr[i] + "<br/>")
+  	}
+  	output += search + " is not in the list<br>"
+  	return null;
+}
+
+function binarySearch(arr, search) {
+	var temp = arr.sort()
+	console.log(temp)
+	output += "sorting...<br>"
+  	var l = 0;
+  	var h = temp.length - 1;
+  	var i = 0;
+  	
+  	while (l <= h) {
+    	var m = Math.floor((l + h) / 2);
+	    if (temp[m] == search) {
+	    	output += ("Round : " + (i + 1) + " ==> " + search + " = " + temp[m] + " found!!<br/>")
+	      	return m;
+	    } else if (temp[m] < search) {
+	      	l = m + 1;
+	    } else {
+	      	h = m - 1;
+	    }
+	    output += ("Round : " + (i + 1) + " ==> " + search + " != " + temp[m] + "<br/>")
+  	}
+  	output += search + " is not in the list<br>"
+  	return null;
+}
+</script>
+	</form>
+	</body>
+</html>
+```
+[File](https://github.com/retrouvez/shippop-exam/blob/master/answer-2/php-1.html)
+
+## PDF Exam 2
 
 ### 1. (ทดสอบ Loop) จงเขียนโปรแกรมให้ แสดงดังภาพต่อไปนี้ (ใช้ภาษา PHP และวงกลมคือตัวอักษร o)
 
